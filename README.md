@@ -13,3 +13,5 @@ Proyek praktikum mata kuliah Pemrograman Web berbasis framework Laravel 12. Apli
    ```bash
    git clone [https://github.com/FADLI-RAHARDIARSYA/praktikum-laravel-c050425006.git](https://github.com/FADLI-RAHARDIARSYA/praktikum-laravel-c050425006.git)
    cd praktikum-laravel-c050425006
+
+## Menambahkan fitur baru sesuai praktikum6
