@@ -12,7 +12,8 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        //
+        $mahasiswa = Mahasiswa::all();
+        return view('mahasiswa.index', compact('mahasiswa'));
     }
 
     /**
@@ -20,7 +21,7 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        //
+        return 'create: form tambah mahasiswa';
     }
 
     /**
@@ -28,7 +29,7 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return 'store: simpan data baru';
     }
 
     /**
@@ -36,30 +37,30 @@ class MahasiswaController extends Controller
      */
     public function show(Mahasiswa $mahasiswa)
     {
-        //
+        return "Nama mahasiswa: {$mahasiswa->nama}";
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Mahasiswa $mahasiswa)
+    public function edit($id)
     {
-        //
+        return "edit: from edit mahasiswa id {$id}";
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Mahasiswa $mahasiswa)
+    public function update(Request $request, $id)
     {
-        //
+        return "update: perbarui data id {$id}";
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Mahasiswa $mahasiswa)
+    public function destroy($id)
     {
-        //
+        return "destroy: hapus data id {$id}";
     }
 }
