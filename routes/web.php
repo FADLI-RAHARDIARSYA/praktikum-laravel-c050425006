@@ -28,3 +28,37 @@ Route::get('/sapa', function (){
 });
 
 Route::resource('matakuliah', MataKuliahController::class);
+
+Route::prefix('akademik')->group(function () {
+
+    // Route Mahasiswa
+    Route::get('/mahasiswa', [MahasiswaController::class, 'index'])->name('mahasiswa.index');
+    Route::get('/mahasiswa/{nim}', [MahasiswaController::class, 'show'])
+        ->where('nim', '[0-9]+')
+        ->name('mahasiswa.show');
+
+    // Route Matakuliah 
+    Route::resource('matakuliah', MatakuliahController::class)->only([
+    'index', 'show', 'create', 'store'
+    ]);
+
+});
+
+Route::get('/profil', function () {
+    return view('profil')
+        ->with('nama', 'Fadli Rahardiarsya')
+        ->with('nim', '2024010001')
+        ->with('prodi', 'D4 Sistem Informasi Kota Cerdas');
+});
+
+Route::get('/akademik/statistik', function () {
+    return view('akademik.statistik');
+});
+
+Route::get('/uji-xss', function () {
+    $namaBerbahaya = '<script>alert("XSS")</script>';
+    
+    return view('uji_xss', [
+        'nama' => $namaBerbahaya
+    ]);
+});
