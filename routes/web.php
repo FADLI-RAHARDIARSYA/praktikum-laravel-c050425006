@@ -4,14 +4,14 @@ use App\Models\Mahasiswa;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\MatakuliahController;
+use App\Http\Controllers\SapaController;
+use App\Http\Controllers\LatihanController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
 Route::get('/artikel', [App\Http\Controllers\ArtikelController::class, 'index']);
-
-Route::resource('mahasiswa', MahasiswaController::class);
 
 Route::prefix('admin')->name ('admin.')->group(function () {
     Route::get('/dashboard', function () {
@@ -62,3 +62,26 @@ Route::get('/uji-xss', function () {
         'nama' => $namaBerbahaya
     ]);
 });
+
+Route::get('/sapa-closure', function () {
+    $nama = 'Ahmad Fauzi';
+    $pesan = "Halo, {$nama}! Ini ditulis langsung di route.";
+    return $pesan;
+});
+
+// routes/web.php
+Route::get('/sapa-controller', [SapaController::class, 'index']);
+
+Route::get('/latihan', [LatihanController::class, 'index']);
+
+Route::get('/mahasiswa-uji', function () {
+    return view('mahasiswa.form-uji');
+});
+Route::post('/mahasiswa-uji', [MahasiswaController::class, 'store']);
+
+Route::get('/api/mahasiswa', [MahasiswaController::class, 'apiIndex']);
+
+Route::get('/mahasiswa/cari-form', function () {
+    return view('mahasiswa.cari');
+});
+Route::get('/mahasiswa/cari', [MahasiswaController::class, 'cariMahasiswa']);
