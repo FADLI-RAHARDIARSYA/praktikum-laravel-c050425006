@@ -21,7 +21,7 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        return 'create: form tambah mahasiswa';
+        //
     }
 
     /**
@@ -29,10 +29,7 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-        $nama = $request->input('nama');
-        $nim  = $request->input('nim');
-
-        return "Data yang diterima -> NIM: {$nim}, Nama: {$nama}";
+        //
     }
 
     /**
@@ -46,43 +43,24 @@ class MahasiswaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit(Mahasiswa $mahasiswa)
     {
-        return "edit: from edit mahasiswa id {$id}";
+        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Mahasiswa $mahasiswa)
     {
-        return "update: perbarui data id {$id}";
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(Mahasiswa $mahasiswa)
     {
-        return "destroy: hapus data id {$id}";
-    }
-
-    public function apiIndex()
-    {
-        return response()->json([
-            'status' => 'sukses',
-            'pesan' => 'Ini contoh response JSON dari Controller',
-        ]);
-    }
-
-    public function cariMahasiswa(Request $request)
-    {
-    $keyword = $request->query('nama');
-    
-    if ($keyword) {
-        return "Kata kunci pencarian nama mahasiswa: {$keyword}";
-    }
-    
-        return "Silakan masukkan kata kunci pencarian pada form.";
+        //
     }
 }

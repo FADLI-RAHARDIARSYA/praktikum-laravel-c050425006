@@ -6,6 +6,15 @@ use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\MatakuliahController;
 use App\Http\Controllers\SapaController;
 use App\Http\Controllers\LatihanController;
+use App\Http\Controllers\StatistikMahasiswaController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\HitungTotalSksController;
+
+Route::get('/matakuliah/total-sks', HitungTotalSksController::class);
+
+Route::get('/admin/dashboard', [DashboardController::class, 'index']);
+
+Route::get('/statistik', StatistikMahasiswaController::class);
 
 Route::get('/', function () {
     return view('welcome');
