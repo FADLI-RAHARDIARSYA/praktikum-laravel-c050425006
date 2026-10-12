@@ -1,14 +1,25 @@
 @extends('layouts.app')
 
-{{-- Judul dinamis yang menyertakan nama mata kuliah --}}
-@section('judul', 'Detail - ' . $matakuliah->nama_mk)
+@section('content')
+<div class="container">
+    <h2>Detail Mata Kuliah: {{ $matakuliah->nama_mk }}</h2>
+    <p>Kode: {{ $matakuliah->kode_mk }} | SKS: {{ $matakuliah->sks }} | Semester: {{ $matakuliah->semester }}</p>
 
-@section('konten')
-<h1>Detail Mata Kuliah</h1>
+    <hr>
 
-<p><strong>Kode MK:</strong> {{ $matakuliah->kode_mk }}</p>
-<p><strong>Nama MK:</strong> {{ $matakuliah->nama_mk }}</p>
-<p><strong>SKS:</strong> {{ $matakuliah->sks }}</p>
+    <h3>Daftar Mahasiswa yang Mengambil Mata Kuliah Ini</h3>
+    <ul>
+        @forelse ($matakuliah->nilai as $n)
+            <li>
+                <strong>{{ $n->mahasiswa->nim ?? '-' }}</strong> - 
+                {{ $n->mahasiswa->nama ?? '-' }} 
+                (Nilai: {{ $n->nilai }})
+            </li>
+        @empty
+            <p>Belum ada data mahasiswa yang mengambil mata kuliah ini.</p>
+        @endforelse
+    </ul>
 
-<a href="{{ route('matakuliah.index') }}">&laquo; Kembali ke Daftar</a>
+    <a href="{{ route('matakuliah.index') }}" class="btn btn-secondary mt-3">Kembali</a>
+</div>
 @endsection

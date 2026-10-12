@@ -9,6 +9,17 @@ use App\Http\Controllers\LatihanController;
 use App\Http\Controllers\StatistikMahasiswaController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\HitungTotalSksController;
+use App\Http\Controllers\QueryBuilderDemoController;
+
+Route::get('/uji-query', [MatakuliahController::class, 'ujiQueryLog']);
+
+Route::resource('matakuliah', MatakuliahController::class);
+
+Route::get('/tugas-3', [QueryBuilderDemoController::class, 'tugasNomorTiga']);
+
+Route::get('/tugas-2', [QueryBuilderDemoController::class, 'tugasNomorDua']);
+
+Route::get('/tugas-1', [QueryBuilderDemoController::class, 'tugasNomorSatu']);
 
 Route::get('/matakuliah/total-sks', HitungTotalSksController::class);
 

@@ -29,7 +29,8 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Mahasiswa::create($request->only(['nim', 'nama', 'email', 'prodi', 'semester']));
+        return redirect()->route('mahasiswa.index')->with('pesan', 'Data berhasil ditambahkan');
     }
 
     /**
@@ -37,6 +38,7 @@ class MahasiswaController extends Controller
      */
     public function show(Mahasiswa $mahasiswa)
     {
+        $mahasiswa->load('nilai.matakuliah'); // eager load relasi
         return view('mahasiswa.show', compact('mahasiswa'));
     }
 
@@ -53,7 +55,8 @@ class MahasiswaController extends Controller
      */
     public function update(Request $request, Mahasiswa $mahasiswa)
     {
-        //
+        $mahasiswa->update($request->only(['nim', 'nama', 'email', 'prodi', 'semester']));
+        return redirect()->route('mahasiswa.index')->with('pesan', 'Data berhasil diperbarui');
     }
 
     /**
@@ -61,6 +64,7 @@ class MahasiswaController extends Controller
      */
     public function destroy(Mahasiswa $mahasiswa)
     {
-        //
+        $mahasiswa->delete();
+        return redirect()->route('mahasiswa.index')->with('pesan', 'Data berhasil dihapus');
     }
 }

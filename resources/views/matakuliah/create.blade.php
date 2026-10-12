@@ -1,47 +1,44 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tambah Mata Kuliah</title>
-</head>
-<body>
-    <h1>Tambah Mata Kuliah Baru</h1>
+@extends('layouts.app')
 
-    <form action="/matakuliah" method="POST">
-        @csrf
-        <div style="margin-bottom: 10px;">
-            <label>Kode MK:</label><br>
-            <input type="text" name="kode_mk" required>
-        </div>
+@section('content')
+<div class="container">
+    <h2>Tambah Mata Kuliah Baru</h2>
 
-        <div style="margin-bottom: 10px;">
-            <label>Nama MK:</label><br>
-            <input type="text" name="nama_mk" required>
-        </div>
-
-        <div style="margin-bottom: 10px;">
-            <label>SKS:</label><br>
-            <input type="number" name="sks" min="1" max="6" required>
-        </div>
-
-        <div style="margin-bottom: 10px;">
-            <label>Semester:</label><br>
-            <input type="number" name="semester" min="1" max="8" required>
-        </div>
-
-        <div style="margin-bottom: 15px;">
-            <label>Dosen Pengampu:</label><br>
-            <select name="dosen_id">
-                <option value="">-- Pilih Dosen --</option>
-                @foreach ($dosen as $d)
-                    <option value="{{ $d->id }}">{{ $d->name }}</option>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
                 @endforeach
-            </select>
+            </ul>
+        </div>
+    @endif
+
+    <form action="{{ route('matakuliah.store') }}" method="POST">
+        @csrf
+
+        <div class="mb-3">
+            <label for="kode_mk" class="form-label">Kode MK</label>
+            <input type="text" class="form-control" id="kode_mk" name="kode_mk" value="{{ old('kode_mk') }}" required>
         </div>
 
-        <button type="submit">Simpan Mata Kuliah</button>
-        <a href="/matakuliah">Batal</a>
+        <div class="mb-3">
+            <label for="nama_mk" class="form-label">Nama Mata Kuliah</label>
+            <input type="text" class="form-control" id="nama_mk" name="nama_mk" value="{{ old('nama_mk') }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="sks" class="form-label">SKS</label>
+            <input type="number" class="form-control" id="sks" name="sks" value="{{ old('sks') }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="semester" class="form-label">Semester</label>
+            <input type="number" class="form-control" id="semester" name="semester" value="{{ old('semester') }}" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Simpan</button>
+        <a href="{{ route('matakuliah.index') }}" class="btn btn-secondary">Batal</a>
     </form>
-</body>
-</html>
+</div>
+@endsection

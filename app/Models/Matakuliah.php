@@ -6,13 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Matakuliah extends Model
-{
-    use HasFactory;
+{ 
+    protected $table = 'matakuliahs';
+    protected $fillable = ['kode_mk', 'nama_mk', 'sks', 'semester'];
 
-    protected $fillable = ['kode_mk', 'nama_mk', 'sks', 'semester', 'dosen_id'];
-
-    public function dosen()
+    public function nilai()
     {
-        return $this->belongsTo(User::class, 'dosen_id');
+        return $this->hasMany(NilaiMatakuliah::class, 'matakuliah_id', 'id');
     }
 }
