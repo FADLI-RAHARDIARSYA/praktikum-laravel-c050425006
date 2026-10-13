@@ -46,4 +46,14 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    
+    public function artikels()
+    {
+        return $this->hasMany(Artikel::class);
+    }
+
+    public function scopeTerbit($query)
+    {
+        return $query->where('status', 'terbit');
+    }
 }

@@ -10,6 +10,9 @@ use App\Http\Controllers\StatistikMahasiswaController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\HitungTotalSksController;
 use App\Http\Controllers\QueryBuilderDemoController;
+use App\Http\Controllers\ArtikelController;
+
+Route::resource('artikel', ArtikelController::class);
 
 Route::get('/uji-query', [MatakuliahController::class, 'ujiQueryLog']);
 
@@ -30,8 +33,6 @@ Route::get('/statistik', StatistikMahasiswaController::class);
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/artikel', [App\Http\Controllers\ArtikelController::class, 'index']);
 
 Route::prefix('admin')->name ('admin.')->group(function () {
     Route::get('/dashboard', function () {

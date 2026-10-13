@@ -17,7 +17,9 @@
         {{-- Menggunakan @include untuk menyisipkan partial navbar (Jawaban Soal 3) --}}
         @include('partials.navbar')
     </header>
-
+    <nav style="margin-top: 10px;">
+    <a href="{{ route('artikel.index') }}">Kelola Artikel</a>
+    </nav>
     <main>
         {{-- Tempat konten utama dari halaman anak disisipkan --}}
         @yield('konten')
