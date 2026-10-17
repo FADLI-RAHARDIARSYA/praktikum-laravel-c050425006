@@ -29,25 +29,19 @@ class ArtikelController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreArtikelRequest $request)
     {
-        $validated = $request->validate([
-            'judul' => 'required|min:5|max:255',
-            'isi' => 'required|min:20',
-            'status' => 'required|in:draft,terbit',
-        ]);
+        $validated = $request->validated();
+
         Artikel::create([
-            'user_id' => auth()->id(),
-            'judul' => $validated['judul'],
-            'slug' => \Illuminate\Support\Str::slug($validated['judul']),
-            'isi' => $validated['isi'],
-            'status' => $validated['status'],
-        ]);
-        Artikel::create($request->validated() + [
             'user_id' => auth()->id() ?? 1,
-            'slug' => \Illuminate\Support\Str::slug($request->judul),
+            'judul'   => $validated['judul'],
+            'slug'    => Str::slug($validated['judul']),
+            'isi'     => $validated['isi'],
+            'status'  => $validated['status'],
         ]);
-    return redirect()->route('artikel.index')->with('pesan', 'Artikel berhasil ditambahkan');
+
+        return redirect()->route('artikel.index')->with('pesan', 'Artikel berhasil ditambahkan');
     }
 
     /**
@@ -69,16 +63,18 @@ class ArtikelController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Artikel $artikel)
+    public function update(UpdateArtikelRequest $request, Artikel $artikel)
     {
-         $artikel->update([
-            'judul' => $request->judul,
-            'slug' => \Illuminate\Support\Str::slug($request->judul),
-            'isi' => $request->isi,
-            'status' => $request->status,
+        $validated = $request->validated();
+
+        $artikel->update([
+            'judul'  => $validated['judul'],
+            'slug'   => Str::slug($validated['judul']),
+            'isi'    => $validated['isi'],
+            'status' => $validated['status'],
         ]);
 
-    return redirect()->route('artikel.index')->with('pesan', 'Artikel berhasil diperbarui');
+        return redirect()->route('artikel.index')->with('pesan', 'Artikel berhasil diperbarui');
     }
 
     /**
